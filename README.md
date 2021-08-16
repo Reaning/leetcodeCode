@@ -1,1 +1,6 @@
-#There are my codes on leetcode,including language Java, cpp
+# LeetCode代码
+本人平时常在vscode上做LeetCode的题目，因此许多LeetCode的代码都保存在本地，为了以后方便管理以及留作纪念，特将保存在本地的代码上传到github上。
+## 主要内容
+平时写过的一些题目，有C++和Java两种语言，目前**C++占多数**，由于现在正在学习Java，所以目前以更新Java代码为主。
+## 注意事项
+此项目中的所有代码都是本人手打，**不保证正确性，仅供参考纪念**，如有错误欢迎指出。
