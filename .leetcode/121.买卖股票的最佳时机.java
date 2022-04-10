@@ -7,16 +7,11 @@
 // @lc code=start
 class Solution {
     public int maxProfit(int[] prices) {
-        int begin = 10005, end = -1,n = prices.length;
         int ans = 0;
-        for(int i = 0; i < n;i++){
-            if(prices[i] < begin){
-                begin = prices[i];
-                end = prices[i];
-            }
-            if(prices[i] > end)end = prices[i];
-            // System.out.println(end +" "+begin);
-            ans = Math.max(ans, end - begin);
+        int min = Integer.MAX_VALUE;
+        for(int i = 0;i < prices.length;i++){
+            min = Math.min(min, prices[i]);
+            ans = Math.max(prices[i] - min, ans);
         }
         return ans;
     }

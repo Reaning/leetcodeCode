@@ -9,21 +9,17 @@ import java.util.Arrays;
 // @lc code=start
 class Solution {
     public int coinChange(int[] coins, int amount) {
-        if(amount == 0)return 0;
-        int[]dp = new int[amount + 1];
-        Arrays.sort(coins);
-        Arrays.fill(dp, Integer.MAX_VALUE);
-        dp[0] = 0;
-        for(int i = 1;i <= amount;i++){
-            for(int j = 0; j < coins.length;j++){
-                if(i - coins[j] >= 0 && dp[i - coins[j]] >= 0){
-                    dp[i] = Math.min(dp[i], 1 + dp[i - coins[j]]);
-                }else{
-                    break;
+        int n = coins.length;
+        int[] dp = new int[amount + 1];
+        for(int i = 1;i <= amount;i++)dp[i] = Integer.MAX_VALUE;
+        for(int i = 0;i < n;i++){
+            for(int j = coins[i];j <= amount;j++){
+                if(dp[j - coins[i]] != Integer.MAX_VALUE){
+                    dp[j] = Math.min(dp[j], dp[j - coins[i]] + 1);
                 }
             }
         }
-        return dp[amount] == 0? -1:dp[amount];
+        return dp[amount] == Integer.MAX_VALUE?-1:dp[amount];
     }
 }
 // @lc code=end
