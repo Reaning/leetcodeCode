@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,35 +14,26 @@ import java.util.Queue;
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
-        LinkedList<Integer>q = new LinkedList<>();
-        List<Integer> ans = new LinkedList<>();
-        Deque<Integer> qq = new LinkedList<>();
-        Queue<Integer>qqq = new LinkedList<>();
-        q.add(e)
-        qq.add(e)
-        qqq.add(e)
-        qqq.peek();
-        int j = 0;
-        while(k-- > 0){
-            if(q.isEmpty())q.add(nums[j++]);
-            else{
-                while(!q.isEmpty() && q.getLast() < nums[j])q.removeLast();
-                q.add(nums[j++]);
+        Deque<Integer> list = new LinkedList<>();
+        for(int i = 0;i < k;i++){
+            while(!list.isEmpty() && nums[list.peekLast()] < nums[i]){
+                list.pollLast();
             }
+            list.addLast(i);
         }
-        ans.add(q.peek());
-        int left = 0;
-        for(int i = j;i < n;i++){
-            if(nums[left++] == q.peek()){
-                q.pop();
+        List<Integer> ans = new ArrayList<>();
+        ans.add(nums[list.getFirst()]);
+        for(int i = k;i < n;i++){
+            if(list.getFirst() <= i - k){
+                list.removeFirst();
             }
-            while(!q.isEmpty() && q.getLast() < nums[i]){
-                q.removeLast();
+            while(!list.isEmpty() && nums[list.peekLast()] < nums[i]){
+                list.pollLast();
             }
-            q.add(nums[i]);
-            ans.add(q.peek());
+            list.addLast(i);
+            ans.add(nums[list.peekFirst()]);
         }
-        return ans.stream().mapToInt(Integer::intValue).toArray();
+        return ans.stream().mapToInt(Integer::valueOf).toArray();
     }
 }
 // @lc code=end
