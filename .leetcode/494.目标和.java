@@ -10,19 +10,17 @@ import java.util.Arrays;
 class Solution {
     public int findTargetSumWays(int[] nums, int target) {
         int sum = Arrays.stream(nums).sum();
-        if(Math.abs(target) > sum)return 0;
-        int diff = sum - target;
-        if(diff % 2 == 1)return 0;
-        target = diff / 2;
-        int[] dp = new int[target + 1];
-        int n = nums.length;
+        if(sum < target)return 0;
+        if(Math.abs(sum - target) % 2 != 0)return 0;
+        int t = Math.abs((sum - target) / 2);
+        int[] dp = new int[t + 1];
         dp[0] = 1;
-        for(int i = 0;i < n;i++){
-            for(int j = target; j >= nums[i];j--){
-                dp[j] += dp[j - nums[i]];
+        for(int num : nums){
+            for(int i = t;i >= num;i--){
+                dp[i] += dp[i - num];
             }
         }
-        return dp[target];
+        return dp[t];
     }
 }
 // @lc code=end
